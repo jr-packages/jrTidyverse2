@@ -15,7 +15,7 @@ Imports:
     GGally,
     repurrrsive,
     wordcloud,
-    gutenbergr
+    gutenbergr,
     ggplot2movies,
     hrbrthemes
 Remotes:

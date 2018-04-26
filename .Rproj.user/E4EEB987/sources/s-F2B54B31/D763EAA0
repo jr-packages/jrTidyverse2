@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3044458376",
+    "hash" : "85402809",
     "id" : "D763EAA0",
-    "lastKnownWriteTime" : 1524747437,
-    "last_content_update" : 1524747437787,
+    "lastKnownWriteTime" : 1524749458,
+    "last_content_update" : 1524749458735,
     "path" : "~/GitHub/jr-packages/jrTidyverse2/DESCRIPTION",
     "project_path" : "DESCRIPTION",
     "properties" : {
-        "cursorPosition" : "15,16",
-        "scrollLine" : "0"
+        "cursorPosition" : "17,15",
+        "scrollLine" : "5"
     },
     "relative_order" : 2,
     "source_on_save" : false,
