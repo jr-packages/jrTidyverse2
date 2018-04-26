@@ -20,7 +20,7 @@ Imports:
     hrbrthemes
 Remotes:
     jr-packages/jrData
-Suggests: knitr, gutenbergr, rmarkdown, jrData
+Suggests: knitr, rmarkdown, jrData
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
