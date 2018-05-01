@@ -1,9 +1,9 @@
 ---
-title: "Practical 1"
+title: "stringr practical"
 author: "Jumping Rivers"
 output: rmarkdown::pdf_document
 vignette: >
-  %\VignetteIndexEntry{practical1}
+  %\VignetteIndexEntry{stringr_practical}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 ---
@@ -12,5 +12,5 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, results = "hide", fig.keep = 'none')
 ```
 
-```{r, child = 'practical1_contents.Rmd'}
+```{r, child = 'stringr_contents.Rmd'}
 ```

@@ -1,0 +1,96 @@
+First we must load **purrr**
+```{r}
+library("purrr")
+```
+
+### Question 1
+
+```{r}
+l = list(x = rnorm(10), y = rnorm(15), z = rnorm(20))
+```
+
+a) `l` is a list with 3 elements; `x`, `y` and `z`. Each are vector of different lengths. Work out the minimum, mean and maximum value for each `x`, `y` and `z` i.e. each element of `l`. Return the output as a vector of doubles.     
+Hint: use `map_dbl()`
+```{r, echo = FALSE}
+map_dbl(l, min)
+map_dbl(l, mean)
+map_dbl(l, max)
+```
+
+b) Do the same but this time using the formula notation
+```{r, echo = FALSE}
+map_dbl(l, ~ min(.x))
+map_dbl(l, ~ mean(.x))
+map_dbl(l, ~ max(.x))
+```
+
+## Question 2
+
+Now we're going to look at a list containing happiness rankings for countries around the globe. 
+```{r}
+data(happiness, package = "jrTidyverse2")
+```
+
+a) How long is the list? Is this a recursive list? How many countries does the list contain information on? For each country how many pieces of information is there?     
+Hint: use `str()`
+```{r, echo = FALSE}
+str(happiness, max.level = 0) 
+# 146 element in the list
+str(happiness, max.level = 1, list.len = 3)
+# Yes, recursive list
+str(happiness, max.level =2, list.len = 3)
+# Each element of the list is another list representing a country. Each list contains elements representative of happiness information on that country for three successive years. Therefore there is 146 countries and 12 vectors of information on each.
+```
+
+b) Grab the name of each country contained in the list. To make it a bit easier to read return the output as a character vector.
+```{r, echo = FALSE}
+country_names = map_chr(happiness, "Country")
+```
+
+c) Try `names(happiness)`, what happens? Use the answer to `b)` to rename each element of the list after it's representative country. 
+```{r, echo = FALSE}
+names(happiness) = country_names
+```
+
+d) What has the UKs average happiness rank been over the last 3 years?
+```{r, echo = FALSE}
+UK_rank = happiness[["United Kingdom"]]$`Happiness Rank`
+mean(UK_rank)
+```
+
+e) Over the last 3 years, what is the average happiness score for every country? Store this in a vector of doubles. 
+```{r, echo = FALSE}
+mean_hap = happiness %>% 
+  map_dbl(~ mean(.x[["Happiness Score"]]))
+mean_hap
+```
+
+f) Which region of the world has the high average happiness score?     
+Hint: store the region for each country in a vector, combine it into a data frame with the average happiness then use **dplyr**.     
+```{r, echo = FALSE, message = FALSE}
+region = happiness %>% 
+  map_chr("Region")
+
+region_hap = data.frame(region = region, mean_hap = mean_hap) 
+
+library("dplyr")
+region_hap %>% 
+  group_by(region) %>% 
+  summarise(av_region_hap = mean(mean_hap)) %>% 
+  arrange(av_region_hap)
+```
+
+### Question 3
+
+Question on beer
+```{r}
+beer_tidy %>% 
+  nest(-Type) %>% 
+  mutate(fit = map(data, ~lm(ABV ~ Color, data = .x))) %>% 
+  mutate(tidyfit = map(fit, ~augment(.x, conf.int = TRUE))) %>% 
+  select(Type, tidyfit) %>% 
+  unnest() %>% 
+  ggplot(aes(x = Color)) + 
+  geom_line(aes(y = .fitted, colour = Type), size = 2) 
+
+```
