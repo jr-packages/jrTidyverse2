@@ -55,3 +55,36 @@ region_hap %>%
   summarise(av_region_hap = mean(mean_hap)) %>% 
   arrange(av_region_hap)
 
+## ---- message = FALSE----------------------------------------------------
+library("tidyr")
+library("broom")
+data(beer_tidy, package = "jrTidyverse2")
+
+## ------------------------------------------------------------------------
+head(beer_tidy)
+
+## ---- echo = FALSE-------------------------------------------------------
+beer_nest = beer_tidy %>% 
+    nest(-Type) 
+
+## ------------------------------------------------------------------------
+fit = lm(ABV ~ Color, data = beer_tidy)
+
+## ---- echo = FALSE-------------------------------------------------------
+beer_nest = beer_nest %>% 
+  mutate(fit = map(data, ~lm(ABV ~ Color, data = .x)))
+
+## ---- echo = FALSE-------------------------------------------------------
+beer_nest = beer_nest %>% 
+  mutate(tidyfit = map(fit, ~augment(.x)))
+
+## ---- echo = FALSE-------------------------------------------------------
+beer_nest = beer_nest %>% 
+  select(Type, tidyfit) %>% 
+  unnest()
+
+## ------------------------------------------------------------------------
+library("ggplot2")
+ggplot(beer_nest) + 
+  geom_line(aes(x = Color, y = .fitted, colour = Type), size = 2) 
+

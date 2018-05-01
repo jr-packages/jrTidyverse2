@@ -9,7 +9,7 @@ library("purrr")
 l = list(x = rnorm(10), y = rnorm(15), z = rnorm(20))
 ```
 
-a) `l` is a list with 3 elements; `x`, `y` and `z`. Each are vector of different lengths. Work out the minimum, mean and maximum value for each `x`, `y` and `z` i.e. each element of `l`. Return the output as a vector of doubles.     
+a) `l` is a list with 3 elements; `x`, `y` and `z`. Each are vectors of different lengths. Work out the minimum, mean and maximum value for `x`, `y` and `z` i.e. each element of `l`. Return each output as a vector of doubles.     
 Hint: use `map_dbl()`
 ```{r, echo = FALSE}
 map_dbl(l, min)
@@ -82,15 +82,52 @@ region_hap %>%
 
 ### Question 3
 
-Question on beer
+Load the data and the required packages
+```{r, message = FALSE}
+library("tidyr")
+library("broom")
+data(beer_tidy, package = "jrTidyverse2")
+```
+Here we have a data set of around 500 beers along with their alcohol percentage, colour and type. 
 ```{r}
-beer_tidy %>% 
-  nest(-Type) %>% 
-  mutate(fit = map(data, ~lm(ABV ~ Color, data = .x))) %>% 
-  mutate(tidyfit = map(fit, ~augment(.x, conf.int = TRUE))) %>% 
-  select(Type, tidyfit) %>% 
-  unnest() %>% 
-  ggplot(aes(x = Color)) + 
-  geom_line(aes(y = .fitted, colour = Type), size = 2) 
+head(beer_tidy)
+```
+We're going to run a linear regression on the data testing how colour affects alcohol percentage. However, using **purrr**, we are going to do it for each different type of beer. 
 
+1) Nest the beers within each type. Save this data in a variable called `beer_nest`.
+```{r, echo = FALSE}
+beer_nest = beer_tidy %>% 
+    nest(-Type) 
+```
+
+2) For each type of beer, fit a linear regression model with alcohol perecentage as the response variable and colour as the predictor. Store the models in a list column next to your nested data. To help you out, the below code is how you would fit the model to the entire data set, before nesting. 
+```{r}
+fit = lm(ABV ~ Color, data = beer_tidy)
+```
+Hint: use `mutate()` and `map()`
+```{r, echo = FALSE}
+beer_nest = beer_nest %>% 
+  mutate(fit = map(data, ~lm(ABV ~ Color, data = .x)))
+```
+
+3) For each model, mutate a new column with the tidied models in. We want to plot the points eventually, so we want to tidy the model such that it returns the fitted points.      
+Hint: use `mutate()`, `map()` and `augment()`
+```{r, echo = FALSE}
+beer_nest = beer_nest %>% 
+  mutate(tidyfit = map(fit, ~augment(.x)))
+```
+  
+4) Select the columns containing the beer type and the tidied models and unnest the data. 
+
+```{r, echo = FALSE}
+beer_nest = beer_nest %>% 
+  select(Type, tidyfit) %>% 
+  unnest()
+```
+  
+5) Given you have stored unnested models in the variable `beer_nest()`, the following code should plot the lines made by the linear regression models 
+```{r}
+library("ggplot2")
+ggplot(beer_nest) + 
+  geom_line(aes(x = Color, y = .fitted, colour = Type), size = 2) 
 ```
