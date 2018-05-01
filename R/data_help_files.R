@@ -86,7 +86,7 @@ NULL
 #'@name happiness
 #'@docType data
 #'@return A list
-#'@usage data(happinesss)
+#'@usage data(happiness)
 #'@keywords lists
 #'@examples
 #' data(happiness)

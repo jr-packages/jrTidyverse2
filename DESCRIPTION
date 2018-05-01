@@ -19,8 +19,8 @@ Imports:
     ggplot2movies,
     hrbrthemes
 Remotes:
-    jr-packages/jrData
-Suggests: knitr, rmarkdown, jrData
+    jr-packages/jrData, jr-packages/jrTidyverse
+Suggests: knitr, rmarkdown, jrData, jrTidyverse
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true

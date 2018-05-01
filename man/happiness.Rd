@@ -5,7 +5,7 @@
 \alias{happiness}
 \title{World Happiness}
 \usage{
-data(happinesss)
+data(happiness)
 }
 \value{
 A list
