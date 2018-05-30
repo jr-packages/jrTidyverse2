@@ -17,7 +17,8 @@ Imports:
     wordcloud,
     gutenbergr,
     ggplot2movies,
-    hrbrthemes
+    hrbrthemes,
+    ggthemes
 Remotes:
     jr-packages/jrData, jr-packages/jrTidyverse
 Suggests: knitr, rmarkdown, jrData, jrTidyverse
