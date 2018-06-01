@@ -3,7 +3,7 @@
 \docType{data}
 \name{files}
 \alias{files}
-\title{File names for Stringr practice}
+\title{File names for stringr practice}
 \usage{
 data(files)
 }
@@ -11,7 +11,7 @@ data(files)
 A vector
 }
 \description{
-Taken from repurrrsive package, but cleaned up.
+File names for stringr practice
 }
 \examples{
 data(files)

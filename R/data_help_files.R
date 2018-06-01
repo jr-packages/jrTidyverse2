@@ -11,9 +11,8 @@
 #' data(planet)
 NULL
 
-#' File names for Stringr practice
+#' File names for stringr practice
 #'
-#' Taken from repurrrsive package, but cleaned up.
 #'
 #'@name files
 #'@docType data
