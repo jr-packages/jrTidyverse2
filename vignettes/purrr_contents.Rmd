@@ -1,24 +1,26 @@
-First we must load **purrr**
-```{r}
-library("purrr")
+First we must load the **tidyverse**
+```{r, message = FALSE, echo = TRUE}
+library("tidyverse")
 ```
 
 ### Question 1
 
-```{r}
-l = list(x = rnorm(10), y = rnorm(15), z = rnorm(20))
+```{r, echo = TRUE}
+data(l, package = "jrTidyverse2")
 ```
 
-a) `l` is a list with 3 elements; `x`, `y` and `z`. Each are vectors of different lengths. Work out the minimum, mean and maximum value for `x`, `y` and `z` i.e. each element of `l`. Return each output as a vector of doubles.     
+a) `l` is a list with 3 elements; `x`, `y` and `z`. Work out the length of each vector as well as the minimum, mean and maximum value for `x`, `y` and `z`. Return each output as a vector of doubles.     
 Hint: use `map_dbl()`
-```{r, echo = FALSE}
+```{r}
+map_dbl(l, length)
 map_dbl(l, min)
 map_dbl(l, mean)
 map_dbl(l, max)
 ```
 
 b) Do the same but this time using the formula notation
-```{r, echo = FALSE}
+```{r}
+map_dbl(l, ~ length(.x))
 map_dbl(l, ~ min(.x))
 map_dbl(l, ~ mean(.x))
 map_dbl(l, ~ max(.x))
@@ -27,107 +29,118 @@ map_dbl(l, ~ max(.x))
 ## Question 2
 
 Now we're going to look at a list containing happiness rankings for countries around the globe. 
-```{r}
+```{r, echo = TRUE}
 data(happiness, package = "jrTidyverse2")
 ```
 
 a) How long is the list? Is this a recursive list? How many countries does the list contain information on? For each country how many pieces of information is there?     
 Hint: use `str()`
-```{r, echo = FALSE}
+```{r}
 str(happiness, max.level = 0) 
 # 146 element in the list
 str(happiness, max.level = 1, list.len = 3)
 # Yes, recursive list
 str(happiness, max.level =2, list.len = 3)
-# Each element of the list is another list representing a country. Each list contains elements representative of happiness information on that country for three successive years. Therefore there is 146 countries and 12 vectors of information on each.
+# Each element of the list is another list representing a country. 
+# Each list contains elements representative of happiness information 
+# on that country for three successive years. Therefore there is 
+# 146 countries and 12 vectors of information on each.
 ```
 
-b) Grab the name of each country contained in the list. To make it a bit easier to read return the output as a character vector.
-```{r, echo = FALSE}
+b) Return the name of each country contained in the list. To make it a bit easier to read return the output as a character vector.
+```{r}
 country_names = map_chr(happiness, "Country")
 ```
 
 c) Try `names(happiness)`, what happens? Use the answer to `b)` to rename each element of the list after it's representative country. 
-```{r, echo = FALSE}
+```{r}
 names(happiness) = country_names
 ```
 
 d) What has the UKs average happiness rank been over the last 3 years?
-```{r, echo = FALSE}
+```{r}
 UK_rank = happiness[["United Kingdom"]]$`Happiness Rank`
 mean(UK_rank)
 ```
 
 e) Over the last 3 years, what is the average happiness score for every country? Store this in a vector of doubles. 
-```{r, echo = FALSE}
+```{r}
 mean_hap = happiness %>% 
   map_dbl(~ mean(.x[["Happiness Score"]]))
-mean_hap
+head(mean_hap)
 ```
 
 f) Which region of the world has the high average happiness score?     
 Hint: store the region for each country in a vector, combine it into a data frame with the average happiness then use **dplyr**.     
-```{r, echo = FALSE, message = FALSE}
+```{r}
 region = happiness %>% 
   map_chr("Region")
 
 region_hap = data.frame(region = region, mean_hap = mean_hap) 
 
-library("dplyr")
 region_hap %>% 
   group_by(region) %>% 
   summarise(av_region_hap = mean(mean_hap)) %>% 
   arrange(av_region_hap)
 ```
 
+g) Using **ggplot2** and `geom_col()`, plot the answer to f) as a bar chart
+```{r}
+region_hap %>% 
+  group_by(region) %>% 
+  summarise(av_region_hap = mean(mean_hap)) %>% 
+  arrange(av_region_hap) %>% 
+  ggplot() + 
+  geom_col(aes(x = region, y = av_region_hap)) + 
+  coord_flip()
+```
+
 ### Question 3
 
 Load the data and the required packages
-```{r, message = FALSE}
-library("tidyr")
+```{r, message = FALSE, echo = TRUE}
 library("broom")
 data(beer_tidy, package = "jrTidyverse2")
 ```
 Here we have a data set of around 500 beers along with their alcohol percentage, colour and type. 
-```{r}
+```{r, echo = TRUE}
 head(beer_tidy)
 ```
 We're going to run a linear regression on the data testing how colour affects alcohol percentage. However, using **purrr**, we are going to do it for each different type of beer. 
 
 1) Nest the beers within each type. Save this data in a variable called `beer_nest`.
-```{r, echo = FALSE}
+```{r}
 beer_nest = beer_tidy %>% 
     nest(-Type) 
 ```
 
 2) For each type of beer, fit a linear regression model with alcohol perecentage as the response variable and colour as the predictor. Store the models in a list column next to your nested data. To help you out, the below code is how you would fit the model to the entire data set, before nesting. 
-```{r}
+```{r, echo = TRUE}
 fit = lm(ABV ~ Color, data = beer_tidy)
 ```
 Hint: use `mutate()` and `map()`
-```{r, echo = FALSE}
+```{r}
 beer_nest = beer_nest %>% 
   mutate(fit = map(data, ~lm(ABV ~ Color, data = .x)))
 ```
 
 3) For each model, mutate a new column with the tidied models in. We want to plot the points eventually, so we want to tidy the model such that it returns the fitted points.      
 Hint: use `mutate()`, `map()` and `augment()`
-```{r, echo = FALSE}
+```{r}
 beer_nest = beer_nest %>% 
   mutate(tidyfit = map(fit, ~augment(.x)))
 ```
   
 4) Select the columns containing the beer type and the tidied models and unnest the data. 
 
-```{r, echo = FALSE}
+```{r}
 beer_nest = beer_nest %>% 
   select(Type, tidyfit) %>% 
   unnest()
 ```
   
-5) Given you have stored unnested models in the variable `beer_nest()`, the following code should plot the lines made by the linear regression models 
-```{r}
-library("ggplot2")
+5) Given you have stored unnested models in the variable `beer_nest()`, the following code WILL plot the lines made by the linear regression models 
+```{r, echo = TRUE}
 ggplot(beer_nest) + 
   geom_line(aes(x = Color, y = .fitted, colour = Type), size = 2) 
 ```

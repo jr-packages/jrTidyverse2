@@ -1,48 +1,47 @@
 First we'll load the data and the relevant packages
-```{r, message = FALSE}
-library(forcats)
+```{r, message = FALSE, echo = TRUE}
 library(tidyverse)
 data(okcupid, package = "jrTidyverse")
 ```
-This is the okcupid data from yesterday's course. We're going to specifically focus on how drinking affects income. 
+This is a data set of dating profiles from the dating website OK Cupid. We're going to specifically focus on how drinking affects income in the land of OK Cupid. 
 
 ### Question 1
 
 a) The column `drinks` corresponds to a persons answer about their drinking habits. What is the average income of each group of drinking habits? Save this as a data frame called `drinks_in` and have the column containing the average income called `av_in`
 Hint: use `group_by()` `then summarise()`
-```{r, echo = FALSE}
+```{r}
 drinks_in = okcupid %>% 
   group_by(drinks) %>% 
   summarise(av_in = mean(income)) 
 ```
 
 b) We can plot the average incomes using **ggplot2**
-```{r}
+```{r, echo = TRUE}
 drinks_in %>% 
   ggplot(aes(x = drinks, y = av_in)) + 
   geom_point()
 ```
 
 c) Previously we saw how to rename factors using `fct_recode()`. However, this will not work with missing values i.e. `NA`'s. A function that will is `fct_explicit_na()`. Try running
-```{r}
+```{r, echo = TRUE}
 x = c(1,2,3,NA)
 (y = factor(x))
 ```
 Notice how the NA isn't included in the factors?
-```{r}
+```{r, echo = TRUE}
 fct_explicit_na(y, "unknown")
 ```
-That will rename the NA factors as "Unknown". Before plotting, use `mutate()` and `fct_explicit_na()` to rename the missing values to something more appropriate. 
-```{r, echo = FALSE}
+That will rename the NA factors as "Unknown". Use `mutate()` and `fct_explicit_na()` to rename the missing values to something more appropriate. Then plot the points using **ggplot2**.
+```{r}
 drinks_in %>% 
   mutate(drinks = fct_explicit_na(drinks, "Unknown")) %>% 
   ggplot(aes(x = drinks, y = av_in)) + 
   geom_point()
 ```
 
-d) Before plotting, reorder the points from lowest average income to highest.      
+d) Reorder the points from lowest average income to highest, then plot using **ggplot2**      
 Hint: use `mutate()` and `fct_reorder()`
-```{r, echo = FALSE}
+```{r}
 drinks_in %>% 
   mutate(drinks = fct_explicit_na(drinks, "Unknown")) %>% 
   mutate(drinks = fct_reorder(drinks, av_in)) %>% 
@@ -50,10 +49,10 @@ drinks_in %>%
   geom_point()
 ```
 
-e) Before plotting, instead of ordering the points from lowest income to highest, order them from people who drink least to people who drink most. Put "Unknown"" where you deem appropriate.      
+e) Reorder the points order from people who drink least to people who drink most and then plot using **ggplot2**. Put the category "Unknown" where you deem appropriate.      
 Hint: use `fct_relevel()`
 
-```{r, echo = FALSE}
+```{r}
 drinks_in %>% 
   mutate(drinks = fct_explicit_na(drinks, "Unknown")) %>% 
   mutate(drinks = fct_relevel(drinks, 
@@ -65,13 +64,16 @@ drinks_in %>%
   geom_point()
 ```
 
-f) Go back to before we summarised the average income of each group. Summarise the groups average income in the same way, but this time collapse "not at all" and "rarely" into "low", "socially" and "often" into "medium" and then "very often" and "desperately" into "high".
-```{r, echo = FALSE}
+f) Summarise the groups average income in the same way, but this time collapse "not at all" and "rarely" into "low", "socially" and "often" into "medium" and then "very often" and "desperately" into "high". Plot it using **ggplot2**.
+```{r}
 okcupid %>% 
   mutate(drinks = fct_explicit_na(drinks, "Unknown")) %>% 
   mutate(drinks = fct_collapse(drinks,
                                Low = c("not at all", "rarely"),
                                Medium = c("socially", "often"),
-                               High = c("very often", "desperately"))) %>% group_by(drinks) %>% 
-  summarise(mean(income))
+                               High = c("very often", "desperately"))) %>%
+  group_by(drinks) %>% 
+  summarise(av_in = mean(income)) %>% 
+  ggplot(aes(x = drinks, y = av_in)) + 
+  geom_point()
 ```

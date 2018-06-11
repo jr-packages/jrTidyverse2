@@ -1,3 +1,14 @@
+#' A simple list
+#'
+#'@name l
+#'@docType data
+#'@return A list
+#'@usage data(l)
+#'@keywords lists
+#'@examples
+#' data(l)
+NULL
+
 #' Star Wars Planets and Their Information
 #'
 #' Taken from repurrrsive package, but cleaned up.

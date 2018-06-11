@@ -1,5 +1,5 @@
 ## ----setup, include = FALSE----------------------------------------------
-knitr::opts_chunk$set(echo = FALSE, collapse = TRUE, results = "hide", fig.keep = 'none')
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, fig.keep = 'none')
 
 ## ---- message = FALSE, echo = TRUE---------------------------------------
 library(tidyverse)

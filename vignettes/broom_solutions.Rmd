@@ -8,8 +8,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(collapse = TRUE, echo = FALSE, results = "hide", fig.keep = 'none')
+```{r, setup, echo = FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = "hide", fig.keep = 'none')
 ```
 
 ```{r, child = 'broom_content.Rmd'}
