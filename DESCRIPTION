@@ -19,6 +19,7 @@ Imports:
     ggplot2movies,
     hrbrthemes,
     ggthemes,
+    ggforce,
     ggraph,
     igraph
 Remotes:
