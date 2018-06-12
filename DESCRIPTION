@@ -19,7 +19,8 @@ Imports:
     ggplot2movies,
     hrbrthemes,
     ggthemes,
-    igraph
+    igraph,
+    ggraph
 Remotes:
     jr-packages/jrData, jr-packages/jrTidyverse
 Suggests: knitr, rmarkdown, jrData, jrTidyverse
