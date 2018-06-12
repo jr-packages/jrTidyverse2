@@ -7,11 +7,9 @@ notifications:
     on_success: change
     on_failure: change
 
-apt_packages:
-  - r-cran-units
-
 r_packages:
   - drat
+  - units
 
 before_install:
   - tlmgr install fancyvrb units
