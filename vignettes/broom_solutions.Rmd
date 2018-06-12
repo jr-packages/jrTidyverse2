@@ -1,9 +1,9 @@
 ---
-title: "broom practical"
+title: "broom solutions"
 author: "Jumping Rivers"
 output: rmarkdown::pdf_document
 vignette: >
-  %\VignetteIndexEntry{broom_practical}
+  %\VignetteIndexEntry{broom_solutions}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 ---

@@ -1,9 +1,9 @@
 ---
-title: "purrr practical"
+title: "purrr solutions"
 author: "Jumping Rivers"
 output: rmarkdown::pdf_document
 vignette: >
-  %\VignetteIndexEntry{purrr_practical}
+  %\VignetteIndexEntry{purrr_solutions}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 ---

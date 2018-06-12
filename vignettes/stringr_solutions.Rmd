@@ -1,9 +1,9 @@
 ---
-title: "stringr practical"
+title: "stringr solutions"
 author: "Jumping Rivers"
 output: rmarkdown::pdf_document
 vignette: >
-  %\VignetteIndexEntry{stringr_practical}
+  %\VignetteIndexEntry{stringr_solutions}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 ---

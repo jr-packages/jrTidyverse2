@@ -1,9 +1,9 @@
 ---
-title: "forcats practical"
+title: "forcats solutions"
 author: "Jumping Rivers"
 output: rmarkdown::pdf_document
 vignette: >
-  %\VignetteIndexEntry{forcats_practical}
+  %\VignetteIndexEntry{forcats_solutions}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 ---
