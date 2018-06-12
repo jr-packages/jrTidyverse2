@@ -9,7 +9,7 @@ notifications:
 
 r_packages:
   - drat
-  - units
+  - ggforce
 
 before_install:
   - tlmgr install fancyvrb units
