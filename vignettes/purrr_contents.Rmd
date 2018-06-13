@@ -9,21 +9,31 @@ library("tidyverse")
 data(l, package = "jrTidyverse2")
 ```
 
-a) `l` is a list with 3 elements; `x`, `y` and `z`. Work out the length of each vector as well as the minimum, mean and maximum value for `x`, `y` and `z`. Return each output as a vector of doubles.     
-Hint: use `map_dbl()`
+a) `l` is a list with 3 vector elements; `A`, `B`, `C`. Each vector contains the heights of a different class at a university. 
+- How many students are in each class?
+- Which class has the highest average height?
+- Which class has the smallest student?
+- Which class has the tallest student?      
+Hint: use `map()`, `map_dbl()`, or `map_df()`
 ```{r}
 map_dbl(l, length)
-map_dbl(l, min)
 map_dbl(l, mean)
+map_dbl(l, min)
 map_dbl(l, max)
+
+### OR
+
+map_df(l, ~tibble(length = length(.x), 
+               mean = mean(.x), 
+               min = min(.x), 
+               max = max(.x)))
 ```
 
-b) Do the same but this time using the formula notation
+b) For each class, work out the lower and upper confidence interval bounds for the mean given that they are  $\mu - 1.96\sigma$ and $\mu + 1.96\sigma$ respectively. Where $\mu$ is the sample mean and $\sigma$ is the sample standard deviation.      
+Hint: use the formula notation and either `map()`, `map_dbl()` or `map_df()`.
 ```{r}
-map_dbl(l, ~ length(.x))
-map_dbl(l, ~ min(.x))
-map_dbl(l, ~ mean(.x))
-map_dbl(l, ~ max(.x))
+map_df(l, ~tibble(lower = mean(.x) - 1.96*sd(.x), 
+                  upper = mean(.x) + 1.96*sd(.x)))
 ```
 
 ## Question 2
