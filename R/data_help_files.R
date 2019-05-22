@@ -1,3 +1,17 @@
+#' OK Cupid data set
+#'
+#' Data from ok cupid see https://github.com/rudeboybert/JSE_OkCupid
+#'
+#'@name okcupid
+#'@docType data
+#'@usage data(okcupid)
+#'@return A tibble
+#'@keywords datasets
+#'@examples
+#' data(okcupid)
+NULL
+
+
 #' A simple list
 #'
 #'@name l
