@@ -22,8 +22,8 @@ Imports:
     igraph,
     ggraph
 Remotes:
-    jr-packages/jrData, jr-packages/jrTidyverse
-Suggests: knitr, rmarkdown, jrData, jrTidyverse
+    jr-packages/jrData
+Suggests: knitr, rmarkdown, jrData
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
