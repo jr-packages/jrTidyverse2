@@ -1,7 +1,9 @@
 ---
 title: "forcats practical"
 author: "Jumping Rivers"
-output: rmarkdown::pdf_document
+output: 
+  rmarkdown::pdf_document:
+  latex_engine: xelatex
 vignette: >
   %\VignetteIndexEntry{forcats_practical}
   \usepackage[utf8]{inputenc}
