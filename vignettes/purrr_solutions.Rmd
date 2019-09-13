@@ -1,7 +1,9 @@
 ---
 title: "purrr solutions"
 author: "Jumping Rivers"
-output: rmarkdown::pdf_document
+output: 
+  rmarkdown::pdf_document:
+    latex_engine: xelatex
 vignette: >
   %\VignetteIndexEntry{purrr_solutions}
   \usepackage[utf8]{inputenc}

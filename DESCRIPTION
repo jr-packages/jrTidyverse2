@@ -1,7 +1,7 @@
 Package: jrTidyverse2
 Type: Package
 Title: Mastering the Tidyverse
-Version: 0.1.0
+Version: 0.1.1
 Author: Jumping Rivers
 Maintainer: Jumping Rivers <colin@jumpingrivers.com>
 Description: The package for the Jumping Rivers "Mastering the Tidyverse" course.
@@ -21,9 +21,7 @@ Imports:
     ggthemes,
     igraph,
     ggraph
-Remotes:
-    jr-packages/jrData, jr-packages/jrTidyverse
-Suggests: knitr, rmarkdown, jrData, jrTidyverse
+Suggests: knitr, rmarkdown, testthat, lintr
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true

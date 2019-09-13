@@ -1,7 +1,7 @@
 First we'll load the data and the relevant packages
 ```{r, message = FALSE, echo = TRUE}
 library(tidyverse)
-data(okcupid, package = "jrTidyverse")
+data(okcupid, package = "jrTidyverse2")
 ```
 This is a data set of dating profiles from the dating website OK Cupid. We're going to specifically focus on how drinking affects income in the land of OK Cupid. 
 
