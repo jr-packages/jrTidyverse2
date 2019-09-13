@@ -9,15 +9,20 @@ data(l, package = "jrTidyverse2")
 
 ## ------------------------------------------------------------------------
 map_dbl(l, length)
-map_dbl(l, min)
 map_dbl(l, mean)
+map_dbl(l, min)
 map_dbl(l, max)
 
+### OR
+
+map_df(l, ~tibble(length = length(.x), 
+               mean = mean(.x), 
+               min = min(.x), 
+               max = max(.x)))
+
 ## ------------------------------------------------------------------------
-map_dbl(l, ~ length(.x))
-map_dbl(l, ~ min(.x))
-map_dbl(l, ~ mean(.x))
-map_dbl(l, ~ max(.x))
+map_df(l, ~tibble(lower = mean(.x) - 1.96*sd(.x), 
+                  upper = mean(.x) + 1.96*sd(.x)))
 
 ## ---- echo = TRUE--------------------------------------------------------
 data(happiness, package = "jrTidyverse2")

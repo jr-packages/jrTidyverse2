@@ -9,6 +9,20 @@
 #' data(l)
 NULL
 
+#' Information of 142 countries
+#'
+#' A recursive list containing info on 142 countries.
+#' Stats taken from the gapminder data in the repurrrsive package
+#'
+#'@name gapl
+#'@docType data
+#'@return A list
+#'@usage data(gapl)
+#'@keywords lists
+#'@examples
+#' data(gapl)
+NULL
+
 #' Star Wars Planets and Their Information
 #'
 #' Taken from repurrrsive package, but cleaned up.
