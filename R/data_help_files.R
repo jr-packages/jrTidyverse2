@@ -37,6 +37,19 @@ NULL
 #' data(gapl)
 NULL
 
+#' Ingredients on 6 classic sandwiches
+#'
+#' Ingredients of 6 clasic sandwiches, as a lists
+#'
+#'@name ingredients
+#'@docType data
+#'@return A list
+#'@usage data(ingredients)
+#'@keywords lists
+#'@examples
+#' data(ingredients)
+NULL
+
 #' Star Wars Planets and Their Information
 #'
 #' Taken from repurrrsive package, but cleaned up.
