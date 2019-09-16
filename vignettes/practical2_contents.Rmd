@@ -35,4 +35,51 @@ d) We're off out! Tonight we're particularly thirsty for a cocktail with rum in 
       filter(contains_rum)
     ```
     
-## Question 2 - Monthly data
+## Question 2 - Happiness
+
+You may remember the happiness data we used for practical 1 was recorded over 3 years; 2015, 2016 and 2017. For this question I've turned the happiness list in 3 tibbles, with each one representing the year. Running the following code will copy each file into your current working directory as a `.csv` file
+```{r, echo = TRUE, results='hide'}
+library("jrTidyverse2")
+get_happiness()
+```
+
+a) Using a combination of **purrr** and the `unnest()` function from **tidyr**, read in and combine the 3 data sets. Don't delete the column containing the file name!
+    ```{r, message = FALSE, warning = FALSE}
+    fnames = list.files("happiness", recursive = TRUE, full.names = TRUE)
+    happiness = tibble(fname = fnames) %>%
+      mutate(data = map(fnames, read_csv)) %>% 
+      unnest()
+    ```
+    ```{r, echo = FALSE, results='hide', message = FALSE, warning = FALSE}
+    file.remove(fnames)
+    file.remove("happiness/")
+    ```
+
+b) The data within the csv files doesn't contain the year. Fortunately the file name does! Use the column containing the filename to create a column called `Year`. Have a look at the `str_remove()` or `parse_number()` functions from **stringr** and **readr** respectively
+    ```{r}
+    happiness = happiness %>% 
+      mutate(Year = parse_number(fname)) %>% 
+      select(-fname)
+    # or
+    # happiness = happiness %>%
+    #   mutate(Year = str_remove(fname, ".csv"),
+    #          Year = as.numeric(Year)) %>%
+    #   select(-fname)
+    ```
+
+c) Pick 3 countries and plot their happiness rank over time. 
+    ```{r}
+    happiness %>% 
+      filter(Country %in% c("Denmark", "United Kingdom", "United States")) %>% 
+      ggplot(aes(x = Year, y = `Happiness Rank`, colour = Country)) + 
+      geom_line() + 
+      geom_point()
+    ```
+
+d) Every country in the data set has requested that they have their data sent to them individually. Make use of  **purrr**'s parallel mapping functions and `nest()` to write the data to `.csv` files
+    ```{r, eval = FALSE}
+    happiness_nest = happiness %>% 
+      nest(-Country)
+    map2(happiness_nest$Country, happiness_nest$data, 
+         ~write_csv(.y, path = paste0(.x, ".csv"))
+    ```

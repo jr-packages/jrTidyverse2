@@ -1,11 +1,11 @@
 ---
-title: "stringr solutions"
+title: "Practical 3: Solutions"
 author: "Jumping Rivers"
 output: 
   rmarkdown::pdf_document:
     latex_engine: xelatex
 vignette: >
-  %\VignetteIndexEntry{stringr_solutions}
+  %\VignetteIndexEntry{solutions3}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 ---

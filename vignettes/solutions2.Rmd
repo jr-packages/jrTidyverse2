@@ -1,11 +1,11 @@
 ---
-title: "purrr solutions"
+title: "Practical 2: Solutions"
 author: "Jumping Rivers"
 output: 
   rmarkdown::pdf_document:
     latex_engine: xelatex
 vignette: >
-  %\VignetteIndexEntry{purrr_solutions}
+  %\VignetteIndexEntry{solutions2}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 ---

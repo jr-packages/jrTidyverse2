@@ -11,6 +11,19 @@
 #' data(okcupid)
 NULL
 
+#' Ingredients of classic cocktails
+#'
+#' Ingredients of classic cocktails as an R list
+#'
+#'@name cocktails
+#'@docType data
+#'@usage data(cocktails)
+#'@return A tibble
+#'@keywords datasets
+#'@examples
+#' data(cocktails)
+NULL
+
 #' Toy list
 #'
 #' Just a toy list!
