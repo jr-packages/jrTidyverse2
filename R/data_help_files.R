@@ -11,6 +11,19 @@
 #' data(okcupid)
 NULL
 
+#' Toy list
+#'
+#' Just a toy list!
+#'
+#'@name toy
+#'@docType data
+#'@usage data(toy)
+#'@return A list
+#'@keywords datasets
+#'@examples
+#' data(toy)
+NULL
+
 
 #' A simple list
 #'

@@ -1,0 +1,18 @@
+---
+title: "forcats solutions"
+author: "Jumping Rivers"
+output: 
+  rmarkdown::pdf_document:
+    latex_engine: xelatex
+vignette: >
+  %\VignetteIndexEntry{forcats_solutions}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, fig.keep = 'none')
+```
+
+```{r, child = 'practical4_content.Rmd'}
+```

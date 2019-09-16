@@ -1,11 +1,11 @@
 ---
-title: "forcats solutions"
+title: "purrr solutions"
 author: "Jumping Rivers"
 output: 
   rmarkdown::pdf_document:
     latex_engine: xelatex
 vignette: >
-  %\VignetteIndexEntry{forcats_solutions}
+  %\VignetteIndexEntry{purrr_solutions}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 ---
@@ -14,5 +14,5 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, fig.keep = 'none')
 ```
 
-```{r, child = 'forcats_content.Rmd'}
+```{r, child = 'practical2_contents.Rmd'}
 ```

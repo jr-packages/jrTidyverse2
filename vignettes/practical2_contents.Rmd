@@ -1,0 +1,38 @@
+First we must load the **tidyverse**
+```{r, message = FALSE, echo = TRUE}
+library("tidyverse")
+```
+
+## Question 1 - Cocktails!
+
+We've put together a small list containing the ingredients of some classic cocktails
+```{r, echo = TRUE}
+data(cocktails, package = "jrTidyverse2")
+```
+
+a) How many cocktails are in the list? 
+    ```{r}
+    str(cocktails)
+    ```
+
+b) Create a tibble called `drinks`, where one column contains the name of the cocktail, and the other column contains the vector of ingredients
+    ```{r}
+    drinks = tibble(cocktail = names(cocktails),
+                    ingredients = cocktails)
+    ```
+    
+c) Create a new column that contains the number of ingredients in each column using `mutate()` and **purrr**
+    ```{r}
+    drinks = drinks %>% 
+      mutate(total_ingredients = map(ingredients, length))
+    ```
+    
+d) We're off out! Tonight we're particularly thirsty for a cocktail with rum in it. Filter `drinks` such that it only has cocktails containing rum
+    ```{r}
+    drinks %>%
+      mutate(contains_rum = map_lgl(ingredients,
+                                    ~ any(.x == "rum"))) %>%
+      filter(contains_rum)
+    ```
+    
+## Question 2 - Monthly data

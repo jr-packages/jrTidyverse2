@@ -1,0 +1,168 @@
+First we must load the **tidyverse**
+```{r, message = FALSE, echo = TRUE}
+library("tidyverse")
+```
+
+## Question 1 - lists
+
+For this question, there is no **purrr**. It's a few questions to get you used to lists.
+
+a) Create a list that contains a numeric, a logical, a character, a vector.
+
+b) Name the elements of your list
+
+c) The following code will load a list called `toy` into your global environment
+    ```{r, echo = TRUE}
+    data(toy, package = "jrTidyverse2")
+    ```
+Make sure to take a look at `toy` before you dive in. How many elements are in toy?
+    ```{r}
+    length(toy)
+    ```
+
+d) Add an extra element called `z` onto `toy`. `z` can be whatever object you like.
+    ```{r}
+    toy$z = "fun with lists"
+    # or
+    toy[["z"]] = "fun with lists"
+    # or
+    toy["z"] = "fun with lists"
+    ```
+
+e) What is the average of the element `d` within `toy`?
+    ```{r}
+    mean(toy$d)
+    ```
+
+f) What is the average of the column `f` within element `e` of `toy`?
+    ```{r}
+    mean(toy$e$f)
+    ```
+
+g) What is the average of the column `f` in the element `e`, where the values of the column `g` are `"a"`?
+    ```{r, message = FALSE}
+    toy$e %>% 
+      filter(g == "a") %>% 
+      summarise(mean(f))
+    ```
+
+## Question 2 - **purrr** beginnings
+
+a) If we have a vector `x`, we can square root it using the `sqrt()` function
+    ```{r, echo = TRUE}
+    x = c(1,4,9,25)
+    sqrt(x)
+    ```
+Can you do the same but using the `map` functions? Make sure your output is a vector.
+    ```{r}
+    map_dbl(x, sqrt)
+    ```
+
+
+## Question 3 - Happiness
+
+Now we're going to look at a list containing information such as happiness and economy rankings for countries around the globe in the years 2015, 2016 and 2017.
+```{r, echo = TRUE}
+data(happiness, package = "jrTidyverse2")
+```
+
+a) Using `str()` to investigate the list and determine:
+    + How long is the list?
+    ```{r}
+    str(happiness, max.level = 0) 
+    # 146 element in the list
+    ```
+    + Is the list a recursive list?
+    ```{r}
+    str(happiness, max.level = 1, list.len = 3)
+    # Yes, recursive list
+    ```
+    + How many countries does the list contain information on?
+    + For each country, how many piece of information do we have?
+    ```{r}
+    str(happiness, max.level =2, list.len = 3)
+    # Each element of the list is another list representing a country. 
+    # Each list contains elements representative of happiness information 
+    # on that country for three successive years. Therefore there is 
+    # 146 countries and 12 pieces of information on each.
+    ```
+
+b) Extract the name of each country using the `map` functions. To make it a bit easier to read, return the output as a character vector.
+    ```{r}
+    country_names = map_chr(happiness, "Country")
+    ```
+
+c) Try `names(happiness)`, what happens? Use the answer to `b)` to rename each element of the list after it's representative country. 
+    ```{r}
+    names(happiness) = country_names
+    ```
+
+d) What has the UKs happiness rank been over the last 3 years? (You don't have to use **purrr** for this one.)
+    ```{r}
+    happiness[["United Kingdom"]]$`Happiness Rank`
+    ```
+
+e) Which country has had the highest average happiness score? 
+    ```{r}
+    happiness %>% 
+      map_dbl(~ mean(.x[["Happiness Score"]])) %>% 
+      sort(decreasing = TRUE) %>% 
+      head()
+    ```
+
+f) Which country has had the largest increase in happiness score from 2015 - 2017?
+    ```{r}
+    happiness %>%
+      map_dbl( ~ .x$`Happiness Score`[3] - .x$`Happiness Score`[1]) %>%
+      sort(decreasing = TRUE) %>%
+      head()
+    ```
+
+g) Which country has had the largest decrease in life expectency? 
+    ```{r}
+    map_dbl(happiness, ~.x$`Health (Life Expectancy)`[3] - .x$`Health (Life Expectancy)`[1]) %>% 
+      sort() %>% 
+      head()
+    ```
+
+
+## Question 4 - Happiness - Advanced
+
+The following two questions are intended to be a bit trickier. Don't worry if you get stuck on them. Just ask!
+
+a) How many countries economies have shrunk from 2015 - 2017?
+    ```{r}
+    map_lgl(happiness, ~(.x$`Economy (GDP per Capita)`[3] - .x$`Economy (GDP per Capita)`[1]) < 0) %>% 
+      sum()
+    ```
+
+b) On average, which region of the world is the most "generous"?     
+Hint: store the region for each country in a vector, combine it into a data frame with the average generosity score for each country then use **dplyr**.     
+    ```{r}
+    region = happiness %>% 
+      map_chr("Region")
+    
+    av_gen = happiness %>% 
+      map_dbl(~mean(.x$Generosity))
+    
+    region_gen = tibble(region = region, av_gen = av_gen) 
+    
+    region_gen %>% 
+      group_by(region) %>% 
+      summarise(av_region_gen = mean(av_gen)) %>% 
+      arrange(av_region_gen)
+    ```
+
+c) Using **ggplot2** and `geom_col()`, plot the answer to b) as a bar chart
+    ```{r}
+    region_gen %>% 
+      group_by(region) %>% 
+      summarise(av_region_gen = mean(av_gen)) %>% 
+      arrange(av_region_gen)%>% 
+      ggplot() + 
+      geom_col(aes(x = region, y = av_region_gen)) + 
+      coord_flip()
+    ```
+
+
+
