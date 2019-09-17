@@ -19,6 +19,7 @@ get_happiness = function(){
           setwd() function or under Session in RStudio. If you still can't get
          it  working let me know and I will send you a copy manually.")
   }
-  message("Files have been copied successfully! Check your current working directory.")
+  message("Files have been copied successfully!
+          Check your current working directory.")
   TRUE
 }
