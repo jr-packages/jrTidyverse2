@@ -35,7 +35,49 @@ d) We're off out! Tonight we're particularly thirsty for a cocktail with rum in 
       filter(contains_rum)
     ```
     
-## Question 2 - Happiness
+## Question 2 - Beer !
+
+So, we're at the pub with 8 mates and it's your round. In total you've been tasked with ordering 4 ales, 3 ipas, 1 stout plus an ale for yourself! We can load a data set of all of the ale, ipa and stouts that the pub sells from the course package
+```{r}
+(data(beer_tidy, package = "jrTidyverse2"))
+```
+
+We're going to randomly select each persons drink using **purrr**. If people had asked for an even number of ales, ipas and stouts we could have done this without **purrr** like so
+```{r}
+beer_tidy %>% 
+  group_by(Type) %>% 
+  sample_n(3)
+```
+
+a) Nest the data according to the drink `Type` and save it as `pub`.
+    ```{r}
+    pub = beer_tidy %>% 
+      nest(-Type)
+    ```
+
+b) Create a column called `n` that contains the total number of each drink `Type` you need to order
+    ```{r}
+    pub = pub %>% 
+      mutate(n = c(5, 3, 1))
+    ```
+
+c) Create a new column called order that contains the randomly sampled drinks you are going to order. You should be using `map2()` to parallel map over the columns `data` and `n`. You should also be using `sample_n()` to perform the sampling.
+    ```{r}
+    pub = pub %>% 
+      mutate(order = map2(data, n, sample_n))
+    # or 
+    # mutate(order = map2(.x = data, .y = n, ~sample_n(.x, .y)))
+    ```
+    
+d) To see the drinks, select only the `Type` and `order` column, then `unnest()`
+    ```{r}
+    pub %>% 
+      select(Type, order) %>% 
+      unnest()
+    ```
+
+
+## Question 3 - Happiness
 
 You may remember the happiness data we used for practical 1 was recorded over 3 years; 2015, 2016 and 2017. For this question I've turned the happiness list in 3 tibbles, with each one representing the year. Running the following code will copy each file into your current working directory as a `.csv` file
 ```{r, echo = TRUE, results='hide'}
