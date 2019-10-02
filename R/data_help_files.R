@@ -11,12 +11,16 @@
 #' data(okcupid)
 NULL
 
-#' @name bond
-#' @title James Bond Data set
+#' James Bond Data set
 #'
-#' @description Statistics from the James bond films
+#' Statistics from the James bond films
+#'
+#' @name bond
 #' @source http://www.knownman.com/james-bond-graph/
+#' @return a tibble
 #' @docType data
+#' @examples
+#' data(bond)
 NULL
 
 

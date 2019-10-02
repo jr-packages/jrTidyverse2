@@ -7,6 +7,12 @@
 \source{
 http://www.knownman.com/james-bond-graph/
 }
+\value{
+a tibble
+}
 \description{
 Statistics from the James bond films
+}
+\examples{
+data(bond)
 }
