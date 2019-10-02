@@ -19,9 +19,9 @@ before_script:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/test_deploy.sh
   - bash test_deploy.sh
   - rm test_deploy.sh
+  - R CMD INSTALL $PKG_TARBALL
+  - Rscript -e 'lintr::lint_package()'
 
 after_success:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/deploy.sh
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash deploy.sh
-  - R CMD INSTALL $PKG_TARBALL
-  - Rscript -e 'lintr::lint_package()'
