@@ -1,2 +1,2 @@
-library("testthat")
-test_check("jrTidyverse2")
+# library("testthat")
+# test_check("jrTidyverse2")
