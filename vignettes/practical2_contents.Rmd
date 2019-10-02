@@ -43,7 +43,7 @@ So, we're at the pub with 8 mates and it's your round. In total you've been task
 ```
 
 We're going to randomly select each persons drink using **purrr**. If people had asked for an even number of ales, ipas and stouts we could have done this without **purrr** like so
-```{r}
+```{r, echo = TRUE}
 beer_tidy %>% 
   group_by(Type) %>% 
   sample_n(3)
@@ -52,7 +52,7 @@ beer_tidy %>%
 a) Nest the data according to the drink `Type` and save it as `pub`.
     ```{r}
     pub = beer_tidy %>% 
-      nest(-Type)
+      nest(data = -Type)
     ```
 
 b) Create a column called `n` that contains the total number of each drink `Type` you need to order
