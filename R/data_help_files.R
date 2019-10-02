@@ -26,6 +26,21 @@ NULL
 #' data(afinn)
 NULL
 
+#' bing sentiments
+#'
+#' Sentiments for bing data. We've downloaded these, because
+#' the get_sentiments function is interactive for first
+#' time users. This makes it fail the CI
+#'
+#'@name bing
+#'@docType data
+#'@usage data(bing)
+#'@return A tibble
+#'@keywords datasets
+#'@examples
+#' data(bing)
+NULL
+
 #' James Bond Data set
 #'
 #' Statistics from the James bond films
