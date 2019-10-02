@@ -71,9 +71,9 @@ c) Create a new column called order that contains the randomly sampled drinks yo
     
 d) To see the drinks, select only the `Type` and `order` column, then `unnest()`
     ```{r}
-    pub %>% 
-      select(Type, order) %>% 
-      unnest()
+    pub %>%
+      select(Type, order) %>%
+      unnest(cols = order)
     ```
 
 
@@ -121,7 +121,7 @@ c) Pick 3 countries and plot their happiness rank over time.
 d) Every country in the data set has requested that they have their data sent to them individually. Make use of  **purrr**'s parallel mapping functions and `nest()` to write the data to `.csv` files
     ```{r, eval = FALSE}
     happiness_nest = happiness %>% 
-      nest(-Country)
+      nest(cols = -Country)
     map2(happiness_nest$Country, happiness_nest$data, 
          ~write_csv(.y, path = paste0(.x, ".csv"))
     ```
