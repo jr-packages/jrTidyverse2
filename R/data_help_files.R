@@ -11,6 +11,21 @@
 #' data(okcupid)
 NULL
 
+#' afinn sentiments
+#'
+#' Sentiments for afinn data. We've downloaded these, because
+#' the get_sentiments function is interactive for first
+#' time users. This makes it fail the CI
+#'
+#'@name afinn
+#'@docType data
+#'@usage data(afinn)
+#'@return A tibble
+#'@keywords datasets
+#'@examples
+#' data(afinn)
+NULL
+
 #' James Bond Data set
 #'
 #' Statistics from the James bond films
