@@ -11,6 +11,15 @@
 #' data(okcupid)
 NULL
 
+#' @name bond
+#' @title James Bond Data set
+#'
+#' @description Statistics from the James bond films
+#' @source http://www.knownman.com/james-bond-graph/
+#' @docType data
+NULL
+
+
 #' Ingredients of classic cocktails
 #'
 #' Ingredients of classic cocktails as an R list
