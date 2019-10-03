@@ -22,6 +22,7 @@ before_script:
 
 after_script:
   - Rscript -e 'lintr::lint_package()'
+  - Rscript -e 'if(length(lintr::lint_package()) > 0) stop("Fix lint")'
 
 after_success:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/deploy.sh
