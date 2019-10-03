@@ -21,7 +21,7 @@ Imports:
     ggthemes,
     igraph,
     ggraph
-Suggests: knitr, rmarkdown, lintr
+Suggests: knitr, rmarkdown, lintr, htmlwidgets
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
