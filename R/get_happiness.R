@@ -12,7 +12,7 @@ get_happiness = function() {
     stop("Something wen't wrong, package internal csv file could not be found.
          Let me know and I will send you a copy manually")
   }
-  if (!file.copy(from = fpath,to = getwd(),
+  if (!file.copy(from = fpath, to = getwd(),
                  recursive = TRUE, overwrite = TRUE)) {
     stop("Couldn't copy the file, you may not have permission to write to this
           directory. Try changing the working directory, either through the

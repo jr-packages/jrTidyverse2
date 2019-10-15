@@ -1,7 +1,7 @@
 Package: jrTidyverse2
 Type: Package
 Title: Mastering the Tidyverse
-Version: 0.1.1
+Version: 0.1.2
 Author: Jumping Rivers
 Maintainer: Jumping Rivers <colin@jumpingrivers.com>
 Description: The package for the Jumping Rivers "Mastering the Tidyverse" course.
