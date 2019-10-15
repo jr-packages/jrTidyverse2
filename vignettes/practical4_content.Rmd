@@ -9,7 +9,7 @@ This is a data set of dating profiles from the dating website OK Cupid. We're go
 
 a) The column `drinks` corresponds to a persons answer about their drinking habits. What is the average income of each group of drinking habits? Save this as a data frame called `drinks_in` and have the column containing the average income called `av_in`
 Hint: use `group_by()` `then summarise()`
-```{r}
+```{r, echo = TRUE}
 drinks_in = okcupid %>% 
   group_by(drinks) %>% 
   summarise(av_in = mean(income)) 

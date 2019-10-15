@@ -49,7 +49,7 @@ url = beer$URL
 ```
 
 1) Extract the last part of the url.      
-Hint: Your regex should start with `\` and should end with a `$`.
+Hint: Your regex should start with `/` and should end with a `$`.
 ```{r}
 url = url%>% 
   str_extract("/[a-zA-Z-_0-9]*$") 

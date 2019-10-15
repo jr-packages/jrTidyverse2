@@ -38,7 +38,7 @@ d) We're off out! Tonight we're particularly thirsty for a cocktail with rum in 
 ## Question 2 - Beer !
 
 So, we're at the pub with 8 mates and it's your round. In total you've been tasked with ordering 4 ales, 3 ipas, 1 stout plus an ale for yourself! We can load a data set of all of the ale, ipa and stouts that the pub sells from the course package
-```{r}
+```{r, echo = TRUE}
 (data(beer_tidy, package = "jrTidyverse2"))
 ```
 
@@ -52,7 +52,7 @@ beer_tidy %>%
 a) Nest the data according to the drink `Type` and save it as `pub`.
     ```{r}
     pub = beer_tidy %>% 
-      nest(data = -Type)
+      nest(-Type)
     ```
 
 b) Create a column called `n` that contains the total number of each drink `Type` you need to order
