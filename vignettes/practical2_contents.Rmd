@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 First we must load the **tidyverse**
 ```{r, message = FALSE, echo = TRUE}
 library("tidyverse")
@@ -123,5 +128,5 @@ d) Every country in the data set has requested that they have their data sent to
     happiness_nest = happiness %>% 
       nest(cols = -Country)
     map2(happiness_nest$Country, happiness_nest$data, 
-         ~write_csv(.y, path = paste0(.x, ".csv"))
+         ~write_csv(.y, path = paste0(.x, ".csv")))
     ```
