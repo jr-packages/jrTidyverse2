@@ -51,7 +51,7 @@ url = beer$URL
 1) Extract the last part of the url.      
 Hint: Your regex should start with `/` and should end with a `$`.
 ```{r}
-url = url%>% 
+url = url %>% 
   str_extract("/[a-zA-Z-_0-9]*$") 
 ```
 
@@ -72,6 +72,9 @@ url = url %>%
   str_replace_all("(\\-|\\_)", " ")
 ```  
 
+```{r echo = FALSE}
+# nolint start
+```
 4) The beer names will now look like        
 `the devil is in the details duvel clone `     
 
@@ -82,10 +85,12 @@ url = url %>%
   str_trim()
 beer$URL = url
 ```
-
+```{r echo = FALSE}
+# nolint end
+```
 5) We want to do some analysis on the beers based on whether they are an IPA, stout or pale ale. To do this we're going to introduce a new function called `if_else()` from **dplyr**. For example
 ```{r, echo = TRUE}
-df = data.frame(x = c(2,4,6,8))
+df = data.frame(x = c(2, 4, 6, 8))
 ```
 Here we have made a data frame called `df` containing a column of numbers called `x`.
 ```{r, echo = TRUE}

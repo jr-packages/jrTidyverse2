@@ -24,7 +24,7 @@ drinks_in %>%
 
 c) Previously we saw how to rename factors using `fct_recode()`. However, this will not work with missing values i.e. `NA`'s. A function that will is `fct_explicit_na()`. Try running
 ```{r, echo = TRUE}
-x = c(1,2,3,NA)
+x = c(1, 2, 3, NA)
 (y = factor(x))
 ```
 Notice how the NA isn't included in the factors?
