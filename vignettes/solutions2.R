@@ -24,10 +24,10 @@ drinks %>%
                                 ~ any(.x == "rum"))) %>%
   filter(contains_rum)
 
-## ------------------------------------------------------------------------
+## ---- echo = TRUE--------------------------------------------------------
 (data(beer_tidy, package = "jrTidyverse2"))
 
-## ------------------------------------------------------------------------
+## ---- echo = TRUE--------------------------------------------------------
 beer_tidy %>% 
   group_by(Type) %>% 
   sample_n(3)
@@ -47,9 +47,9 @@ pub = pub %>%
 # mutate(order = map2(.x = data, .y = n, ~sample_n(.x, .y)))
 
 ## ------------------------------------------------------------------------
-pub %>% 
-  select(Type, order) %>% 
-  unnest()
+pub %>%
+  select(Type, order) %>%
+  unnest(cols = order)
 
 ## ---- echo = TRUE, results='hide'----------------------------------------
 library("jrTidyverse2")
@@ -84,7 +84,7 @@ happiness %>%
 
 ## ---- eval = FALSE-------------------------------------------------------
 #  happiness_nest = happiness %>%
-#    nest(-Country)
+#    nest(cols = -Country)
 #  map2(happiness_nest$Country, happiness_nest$data,
 #       ~write_csv(.y, path = paste0(.x, ".csv"))
 
