@@ -14,5 +14,9 @@ vignette: >
 knitr::opts_chunk$set(echo = FALSE, collapse = TRUE, results = "hide", fig.keep = "none")
 ```
 
+```{r, include=FALSE}
+options(tinytex.verbose = TRUE)
+```
+
 ```{r, child = 'practical1_contents.Rmd'}
 ```
