@@ -12,11 +12,9 @@ vignette: >
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE, collapse = TRUE, results = "hide", fig.keep = "none")
+library(tinytex)
 ```
 
-```{r, include=FALSE}
-options(tinytex.verbose = TRUE)
-```
 
 ```{r, child = 'practical1_contents.Rmd'}
 ```
