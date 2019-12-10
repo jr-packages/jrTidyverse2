@@ -1,36 +1,31 @@
 ## Question 1
 
-We'll start by loading the necessary packages and data sets
-```{r, message=FALSE, echo = TRUE}
+Load in the files dataset from jrTidyverse2.
+```{r, echo = TRUE}
 library("tidyverse")
-data(names, package = "jrTidyverse2")
+data(files, package = "jrTidyverse2")
 ```
 
-Here we have a data set containing 800 people with the names: "Abigail", "Alexander", "Ava", "Benjamin", "Charlotte", "Emily", "Emma", "Ethan", "Harper", "Isabella", "Jacob", "James", "Liam", "Mason", "Mia", "Michael", "Noah", "Olivia", "Sophia" and "William".      
+How many files end in .r? (Hint: Remember that the dot is a special character).
+```{r, echo = FALSE}
+str_subset(files, "\\.r$")
+```
 
-<!-- # ```{r, results='asis', echo=FALSE} -->
-<!-- # names %>%  -->
-<!-- #   mutate(name = str_trim(name)) %>%  -->
-<!-- #   mutate(name = str_to_title(name)) %>%  -->
-<!-- #   unique() %>%  -->
-<!-- #   pull(name) %>%  -->
-<!-- #   str_sort() -->
-<!-- # ``` -->
+How would you find files which end in .r or .R?
+```{r, echo = FALSE}
+str_subset(files, "\\.(r|R)$")
+```
 
-
-Using various functions from **stringr** and `count()` from **dplyr**, work out the frequency of each name. Which name occcurs the most?
-```{r}
-names %>% 
-  mutate(name = str_trim(name)) %>% 
-  mutate(name = str_to_title(name)) %>% 
-  count(name) %>% 
-  arrange(n)
+How many files have atleast one number in them?
+```{r, echo = FALSE}
+str_subset(files, "[0-9]")
 ```
 
 ## Question 2
 
 We'll start off by loading the data 
 ```{r, echo = TRUE}
+library("tidyverse")
 data(beer, package = "jrTidyverse2")
 ```
 Let's inspect the data
