@@ -4,7 +4,6 @@ cache: packages
 env:
   global:
     - ALLOWED_NOTES=1
-    - NO_IMPORTS=13
 
 notifications:
   email:
