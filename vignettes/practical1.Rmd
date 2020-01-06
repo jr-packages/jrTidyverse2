@@ -14,5 +14,6 @@ vignette: >
 knitr::opts_chunk$set(echo = FALSE, collapse = TRUE, results = "hide", fig.keep = "none")
 ```
 
+
 ```{r, child = 'practical1_contents.Rmd'}
 ```
