@@ -44,7 +44,7 @@ d) We're off out! Tonight we're particularly thirsty for a cocktail with rum in 
 
 So, we're at the pub with 8 mates and it's your round. In total you've been tasked with ordering 4 ales, 3 ipas, 1 stout plus an ale for yourself! We can load a data set of all of the ale, ipa and stouts that the pub sells from the course package
 ```{r, echo = TRUE}
-(data(beer_tidy, package = "jrTidyverse2"))
+data(beer_tidy, package = "jrTidyverse2")
 ```
 
 We're going to randomly select each persons drink using **purrr**. If people had asked for an even number of ales, ipas and stouts we could have done this without **purrr** like so
