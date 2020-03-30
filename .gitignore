@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 inst/doc
+vignettes/*.pdf
+vignettes/solutions*.R
+vignettes/practical*.R
