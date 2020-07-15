@@ -1,7 +1,7 @@
 Type: Package
 Package: jrTidyverse2
 Title: Mastering the Tidyverse
-Version: 0.1.403
+Version: 0.1.405
 Author: Jumping Rivers
 Maintainer: Jumping Rivers <colin@jumpingrivers.com>
 Description: The package for the Jumping Rivers "Mastering
@@ -20,6 +20,7 @@ Imports:
     igraph,
     magrittr,
     repurrrsive,
+    stopwords,
     textdata,
     tidytext,
     tidyverse,
