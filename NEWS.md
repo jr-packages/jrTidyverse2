@@ -1,3 +1,6 @@
+# jrTidyverse2 0.1.406 _2020-09-08_
+  * Change package title
+
 # jrTidyverse2 0.1.405 _2020-07-15_
   * Addings news.md
   * Adding **stopwords** to imports
