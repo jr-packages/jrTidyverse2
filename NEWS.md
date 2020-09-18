@@ -1,3 +1,6 @@
+# jrTidyverse2 0.1.407 _2020-09-18_
+  * Change package title to "Jumping Rivers: Next Steps in the Tidyverse"
+
 # jrTidyverse2 0.1.406 _2020-09-08_
   * Change package title
 
